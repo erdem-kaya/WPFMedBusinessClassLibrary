@@ -6,10 +6,16 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Business.Services;
 
-public class UserService(IFileService fileService, List<UserModel> users) : IUserService
+public class UserService : IUserService
 {
-    private readonly IFileService _fileService = fileService;
-    private readonly List<UserModel> _users = users;
+    private readonly IFileService _fileService;
+    private readonly List<UserModel> _users;
+
+    public UserService(IFileService fileService)
+    {
+        _fileService = fileService;
+        _users = _fileService.ReadUsers() ?? [];
+    }
 
     public bool AddUser(UserRegistrationForm form)
     {

@@ -4,8 +4,8 @@ namespace Business.Interfaces;
 
 public interface IFileService
 {
-    IEnumerable<UserModel> ReadUsers();
-    void SaveUsers(IEnumerable<UserModel> users);
+    List<UserModel> ReadUsers();
+    void SaveUsers(List<UserModel> users);
     void DeleteUsers();
-    void UpdateUsers(IEnumerable<UserModel> users);
+    void UpdateUsers(List<UserModel> users);
 }

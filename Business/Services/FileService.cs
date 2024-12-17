@@ -10,10 +10,10 @@ public class FileService : IFileService
     private readonly string _filePath;
     private readonly JsonSerializerOptions _jsonSerializerOptions;
 
-    public FileService(string directoryPath, string filePath)
+    public FileService(string directoryPath = "Data", string fileName = "users.json")
     {
         _directoryPath = directoryPath;
-        _filePath = filePath;
+        _filePath = Path.Combine(_directoryPath, fileName);
         _jsonSerializerOptions = new JsonSerializerOptions
         {
             WriteIndented = true
@@ -35,7 +35,7 @@ public class FileService : IFileService
         }
     }
 
-    public IEnumerable<UserModel> ReadUsers()
+    public List<UserModel> ReadUsers()
     {
         try
         {
@@ -44,8 +44,8 @@ public class FileService : IFileService
                 return [];
             }
             var json = File.ReadAllText(_filePath);
-            var users = JsonSerializer.Deserialize<IEnumerable<UserModel>>(json, _jsonSerializerOptions);
-            return users ?? [];
+            var users = JsonSerializer.Deserialize<List<UserModel>>(json, _jsonSerializerOptions);
+            return users ?? new List<UserModel>();
 
 
         }
@@ -56,7 +56,7 @@ public class FileService : IFileService
         }
     }
 
-    public void SaveUsers(IEnumerable<UserModel> users)
+    public void SaveUsers(List<UserModel> users)
     {
         try
         {
@@ -74,7 +74,7 @@ public class FileService : IFileService
     }
 
     // Jag är osäker på om denna metod behövs
-    public void UpdateUsers(IEnumerable<UserModel> users)
+    public void UpdateUsers(List<UserModel> users)
     {
         try
         {
