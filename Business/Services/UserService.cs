@@ -55,7 +55,7 @@ public class UserService : IUserService
     }
 
 
-    public IEnumerable<UserModel> GetUsers()
+    public IEnumerable<UserModel> GetAllUsers()
     {
         return _users;
     }

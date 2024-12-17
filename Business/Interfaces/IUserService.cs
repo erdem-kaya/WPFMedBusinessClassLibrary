@@ -5,7 +5,7 @@ namespace Business.Interfaces;
 
 public interface IUserService
 {
-    IEnumerable<UserModel> GetUsers();
+    IEnumerable<UserModel> GetAllUsers();
     bool AddUser(UserRegistrationForm form);
     bool UpdateUser(UserModel user);
     bool DeleteUser(Guid id);
